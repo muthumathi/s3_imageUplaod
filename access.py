@@ -1,5 +1,3 @@
-import os
-
-ACCESS_KEY =  'Your Access Key'
-SECRET_KEY = 'Your Secret Key'
-bucket_name = "Your Bucket name"
+ACCESS_KEY =  'Yours'
+SECRET_KEY = 'Yours'
+bucket_name = "Yours"

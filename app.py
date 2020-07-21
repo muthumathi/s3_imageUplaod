@@ -1,11 +1,7 @@
-import requests
 from flask import Flask,request
 import boto3,os
-from botocore.exceptions import NoCredentialsError
 import time
 from PIL import Image
-
-
 import access
 
 from werkzeug.utils import secure_filename
@@ -25,8 +21,12 @@ bucket_resource = s3
 def upload_files():
     try:
         img = request.files['files']
-
         print(img.filename)
+        filed, ext = os.path.splitext(img.filename)
+        print(ext)
+        # ext = str(ext)
+        if (ext != '.png' and ext != '.jpg' and ext != '.jpge'):
+            return ('Only Accepting .png,.jpg and .jpge Files')
         original = '/home/muthu/Pictures/upload/' + str(img.filename)
         padam = Image.open(original)
         width, height = padam.size
@@ -38,11 +38,7 @@ def upload_files():
         height = str(height)
         print('width = '+width)
         print('height = '+height)
-        filed,ext = os.path.splitext(img.filename)
-        print(ext)
-        # ext = str(ext)
-        if (ext != '.png' and ext != '.jpg' and ext != '.jpge'):
-            return ('Only Accepting .png,.jpg and .jpge Files')
+
         filename = ''
         if img:
             ts = int(time.time())
